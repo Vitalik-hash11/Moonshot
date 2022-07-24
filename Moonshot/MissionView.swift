@@ -30,43 +30,17 @@ struct MissionView: View {
                         Divider()
                         Text("Mission Highlights")
                             .font(.title.bold())
-                            .padding(.bottom, 5)
+                        
+                        Text("Launch date: \(mission.formattedLaunchDate)")
+                            .font(.headline)
+                            .padding(.vertical)
                         
                         Text(mission.description)
                         Divider()
-                        
-                        Text("Crew")
-                            .font(.largeTitle)
                     }
                     .padding(.horizontal)
                     
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(crew, id: \.role) { member in
-                                NavigationLink {
-                                    AstronautView(astronaut: member.astronaut)
-                                } label: {
-                                    HStack {
-                                        Image(member.astronaut.id)
-                                            .resizable()
-                                            .frame(width: 104, height: 72)
-                                            .clipShape(Circle())
-                                            .overlay(
-                                                Circle()
-                                                .strokeBorder()
-                                            )
-                                        VStack(alignment: .leading) {
-                                            Text(member.astronaut.name)
-                                                .font(.headline)
-                                            Text(member.role)
-                                                .foregroundColor(.white.opacity(0.5))
-                                        }
-                                    }
-                                    .padding(.horizontal)
-                                }
-                            }
-                        }
-                    }
+                    CrewSlider(crew: crew)
                 }
                 .foregroundColor(.white)
                 .padding(.bottom)
